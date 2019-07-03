@@ -46,6 +46,7 @@ Apache Maven 3.3.9
 #JDK used 
 jdk_1.8
 
-
+# Logs are generated in below file
+customLogs.log
 
 
