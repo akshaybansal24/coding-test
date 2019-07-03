@@ -37,7 +37,7 @@ public class CustomLogging extends PatternLayout{
 	                while (group <= matcher.groupCount()) {
 	                    if (matcher.group(group) != null) {
 	                       int startPos = message.lastIndexOf("=") + 1;
-	                       while(startPos < message.length()) {
+	                       while(startPos < message.length()-1) {
 	                    	   message.setCharAt(startPos, '*');
 	                    	   startPos++;
 	                       }

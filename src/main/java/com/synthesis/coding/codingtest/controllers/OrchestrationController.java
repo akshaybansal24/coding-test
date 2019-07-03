@@ -31,15 +31,25 @@ public class OrchestrationController
 	public ResponseEntity<Object> performBothActivities(@Valid @RequestBody OrchestrationType inputData){
 		User user = inputData.getUser();
 		PaymentCard paymentCard = inputData.getPaymentCard();
+		logger.info("userName={}",user.getUserName());
+		logger.info("address={}",user.getAddress());
+		logger.info("emailAddress={}",user.getEmailAddress());
+		logger.info("Payment card = {}",paymentCard.getCardNumber());
+		logger.info("Payment card expiration date = {}",paymentCard.getExpiryDate());
+		logger.info("Payment card cvv = {}", paymentCard.getCvv());
+		logger.info("Payment card address = {}", paymentCard.getPaymentAddress());
 		CustomResponseEntity createUserResult = callCreateUser(user);
 		if(createUserResult.getResponseCode().contains("200")) {
 			CustomResponseEntity paymentResponse = callPayment(paymentCard);
 			if(paymentResponse.getResponseCode().contains("200")) {
+				logger.info("User is added successfully and payment processed.");
 				return new ResponseEntity<Object>("User added successfully and payment processed.",HttpStatus.OK);
 			}else {
+				logger.info("Failed during payment process");
 				return new ResponseEntity<Object>("Operation Failed duing payment",HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
+		logger.info("Failed during user creation");
 		return new ResponseEntity<Object>("Operation Failed duing user creation",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
