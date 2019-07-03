@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  
+    <appender name="fileAppender1" class="ch.qos.logback.core.FileAppender">
+	    <file>customLogs.log</file>
+	    <append>true</append>
+	    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+	        <layout class="com.synthesis.coding.codingtest.logging.CustomLogging">
+	            <patternsProperty>(userName)|(Payment card)</patternsProperty>
+	            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+	        </layout>
+	    </encoder>
+	</appender>
+     
+    <!-- LOG everything at INFO level -->
+    <root level="info">
+        <appender-ref ref="fileAppender1" />
+    </root>
+ 
+</configuration>
